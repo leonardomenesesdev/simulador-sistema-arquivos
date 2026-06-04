@@ -41,7 +41,7 @@ public class FileSystemSimulator {
         TargetFile target = resolveTargetFile(normalizedTarget, source.getName());
 
         Operation operation = Operation.create(OperationType.COPY_FILE, normalizedSource, normalizedTarget, source.getContent());
-        journal.record(operation);
+        beginJournaledOperation(operation);
 
         SimulatedFile copy = new SimulatedFile(target.fileName(), source.getContent());
         target.directory().addFile(copy);
@@ -59,7 +59,7 @@ public class FileSystemSimulator {
         }
 
         Operation operation = Operation.create(OperationType.DELETE_FILE, normalizedPath, null, null);
-        journal.record(operation);
+        beginJournaledOperation(operation);
 
         parentAndName.parent().removeFile(parentAndName.name());
         parentAndName.parent().touch();
@@ -81,7 +81,7 @@ public class FileSystemSimulator {
         }
 
         Operation operation = Operation.create(OperationType.RENAME_FILE, normalizedPath, newName, null);
-        journal.record(operation);
+        beginJournaledOperation(operation);
 
         parentAndName.parent().removeFile(parentAndName.name());
         file.rename(newName);
@@ -103,7 +103,7 @@ public class FileSystemSimulator {
         }
 
         Operation operation = Operation.create(OperationType.CREATE_DIRECTORY, normalizedPath, null, null);
-        journal.record(operation);
+        beginJournaledOperation(operation);
 
         parentAndName.parent().addDirectory(new SimulatedDirectory(parentAndName.name()));
         parentAndName.parent().touch();
@@ -127,7 +127,7 @@ public class FileSystemSimulator {
         }
 
         Operation operation = Operation.create(OperationType.DELETE_DIRECTORY, normalizedPath, null, null);
-        journal.record(operation);
+        beginJournaledOperation(operation);
 
         parentAndName.parent().removeDirectory(parentAndName.name());
         parentAndName.parent().touch();
@@ -152,7 +152,7 @@ public class FileSystemSimulator {
         }
 
         Operation operation = Operation.create(OperationType.RENAME_DIRECTORY, normalizedPath, newName, null);
-        journal.record(operation);
+        beginJournaledOperation(operation);
 
         parentAndName.parent().removeDirectory(parentAndName.name());
         directory.rename(newName);
@@ -186,7 +186,7 @@ public class FileSystemSimulator {
         }
 
         Operation operation = Operation.create(OperationType.CREATE_FILE, normalizedPath, null, content);
-        journal.record(operation);
+        beginJournaledOperation(operation);
 
         parentAndName.parent().addFile(new SimulatedFile(parentAndName.name(), content));
         parentAndName.parent().touch();
@@ -204,7 +204,12 @@ public class FileSystemSimulator {
             FileSystemState state = (FileSystemState) input.readObject();
             this.root = state.getRoot();
             this.journal = state.getJournal();
-            this.journal.recover();
+            List<Operation> pendingOperations = this.journal.recover();
+            if (!pendingOperations.isEmpty()) {
+                System.out.println("Journal: operacoes pendentes encontradas ao iniciar.");
+                pendingOperations.forEach(operation -> System.out.println(operation.formatForDisplay()));
+                System.out.println("Journal: operacoes pendentes foram mantidas no log para revisao.");
+            }
         } catch (IOException | ClassNotFoundException exception) {
             throw new IllegalStateException("Nao foi possivel carregar o arquivo de dados: " + dataFile, exception);
         }
@@ -225,6 +230,26 @@ public class FileSystemSimulator {
 
     public SimulatedDirectory getRoot() {
         return root;
+    }
+
+    public List<String> listJournalEntries() {
+        List<String> entries = journal.listEntries()
+                .stream()
+                .map(Operation::formatForDisplay)
+                .toList();
+
+        if (entries.isEmpty()) {
+            System.out.println("(journal vazio)");
+            return entries;
+        }
+
+        entries.forEach(System.out::println);
+        return entries;
+    }
+
+    private void beginJournaledOperation(Operation operation) {
+        journal.record(operation);
+        save();
     }
 
     private void saveAndCommit(String operationId) {

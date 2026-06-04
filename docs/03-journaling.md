@@ -27,12 +27,12 @@ Fluxo recomendado:
 
 ## Mini Atividades
 
-- [ ] Definir o formato de uma entrada de journal.
-- [ ] Registrar operacoes com identificador unico.
-- [ ] Salvar entradas pendentes antes da alteracao.
-- [ ] Marcar entradas concluidas depois da persistencia.
-- [ ] Implementar recuperacao ao iniciar o programa.
-- [ ] Documentar no README como o journaling funciona.
+- [x] Definir o formato de uma entrada de journal.
+- [x] Registrar operacoes com identificador unico.
+- [x] Salvar entradas pendentes antes da alteracao.
+- [x] Marcar entradas concluidas depois da persistencia.
+- [x] Implementar recuperacao ao iniciar o programa.
+- [x] Documentar no README como o journaling funciona.
 
 ## Recuperacao
 
@@ -49,4 +49,3 @@ Comportamento simples recomendado:
 - O journal registra todas as operacoes que alteram dados.
 - O README explica o objetivo do journaling.
 - O simulador consegue iniciar mesmo com entradas pendentes no journal.
-

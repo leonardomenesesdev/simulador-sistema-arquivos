@@ -29,6 +29,10 @@ public class Journal implements Serializable {
                 .toList();
     }
 
+    public boolean hasPendingEntries() {
+        return entries.stream().anyMatch(Operation::isPending);
+    }
+
     public List<Operation> listEntries() {
         return Collections.unmodifiableList(entries);
     }
