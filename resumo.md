@@ -100,6 +100,7 @@ Registrar as operacoes antes de confirmar as alteracoes no sistema.
 **O que ele faz:**
 
 - registra uma operacao como pendente;
+- salva a entrada pendente no `filesystem.dat` antes da alteracao;
 - marca uma operacao como concluida;
 - lista as entradas do journal;
 - identifica operacoes pendentes ao carregar o sistema.
@@ -181,8 +182,10 @@ Uma forma simples de apresentar:
 2. Essa arvore fica salva em `filesystem.dat`.
 3. As operacoes passam pela classe `FileSystemSimulator`.
 4. Antes de alterar os dados, o simulador registra a operacao no `Journal`.
-5. Depois que a mudanca e salva, o journal marca a operacao como `COMMITTED`.
-6. Assim, o projeto demonstra manipulacao de arquivos, diretorios, persistencia e journaling sem alterar diretamente o sistema de arquivos real.
+5. O estado com a operacao `PENDING` e salvo no `filesystem.dat`.
+6. Depois que a mudanca e salva, o journal marca a operacao como `COMMITTED`.
+7. Se o programa iniciar com operacoes pendentes, elas sao exibidas no console para revisao.
+8. Assim, o projeto demonstra manipulacao de arquivos, diretorios, persistencia e journaling sem alterar diretamente o sistema de arquivos real.
 
 ## Proximas Funcionalidades a Documentar
 
@@ -190,5 +193,4 @@ Uma forma simples de apresentar:
 - comandos de entrada pelo usuario;
 - exemplos completos de execucao;
 - testes manuais;
-- recuperacao de operacoes pendentes no journal.
-
+- cenarios de falha para demonstrar operacoes pendentes no journal.

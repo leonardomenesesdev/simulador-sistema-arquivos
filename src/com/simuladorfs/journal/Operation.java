@@ -66,4 +66,20 @@ public class Operation implements Serializable {
     public void markCommitted() {
         this.status = OperationStatus.COMMITTED;
     }
+
+    public String formatForDisplay() {
+        return "[" + status + "] "
+                + type
+                + " id=" + id
+                + " origem=" + valueOrDash(sourcePath)
+                + " destino=" + valueOrDash(targetPath)
+                + " data=" + timestamp;
+    }
+
+    private String valueOrDash(String value) {
+        if (value == null || value.isBlank()) {
+            return "-";
+        }
+        return value;
+    }
 }
