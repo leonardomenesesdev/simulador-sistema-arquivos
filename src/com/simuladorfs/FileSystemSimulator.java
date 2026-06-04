@@ -232,6 +232,32 @@ public class FileSystemSimulator {
         return root;
     }
 
+    public boolean isDirectory(String path) {
+        String normalizedPath = normalizePath(path);
+        if ("/".equals(normalizedPath)) {
+            return true;
+        }
+        try {
+            ParentAndName parentAndName = resolveParentAndName(normalizedPath);
+            return parentAndName.parent().hasDirectory(parentAndName.name());
+        } catch (IllegalArgumentException ignored) {
+            return false;
+        }
+    }
+
+    public boolean isFile(String path) {
+        String normalizedPath = normalizePath(path);
+        if ("/".equals(normalizedPath)) {
+            return false;
+        }
+        try {
+            ParentAndName parentAndName = resolveParentAndName(normalizedPath);
+            return parentAndName.parent().hasFile(parentAndName.name());
+        } catch (IllegalArgumentException ignored) {
+            return false;
+        }
+    }
+
     public List<String> listJournalEntries() {
         List<String> entries = journal.listEntries()
                 .stream()

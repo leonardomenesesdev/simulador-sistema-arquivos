@@ -31,3 +31,7 @@ bin/
 
 ### Claude ###
 CLAUDE.md
+
+### Simulador ###
+# Estado gerado em execucao (o "disco" do simulador), nao deve ser versionado
+filesystem.dat
