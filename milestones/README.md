@@ -23,7 +23,7 @@ critérios de aceitação e o que testar para validar.
 | [M04](04-operacoes.md) | Operações de arquivo e diretório | ✅ Concluída | M01, M02, M03 | M05, M06 |
 | [M05](05-modo-shell.md) | Modo Shell interativo | ✅ Concluída | M03, M04 | M06, M07 |
 | [M06](06-testes.md) | Testes manuais + registro | ⏳ Pendente | M04, M05 | M07 |
-| [M07](07-readme-relatorio.md) | README-relatório | ⏳ Pendente | M05, M06 | M08 |
+| [M07](07-readme-relatorio.md) | README-relatório | ✅ Concluída | M05, M06 | M08 |
 | [M08](08-entrega.md) | Entrega (GitHub + PDF + AVA) | ⏳ Pendente | M07 | — |
 
 ## Grafo de dependências
