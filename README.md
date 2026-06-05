@@ -4,11 +4,10 @@
 
 **Projeto no GitHub:** <https://github.com/leonardomenesesdev/simulador-sistema-arquivos>
 
-**Integrantes da dupla:**
+**Integrantes:**
 
-- Leonardo Meneses
-- Segundo integrante: preencher antes da entrega
-
+- Leonardo Meneses Cavalcante
+- Kaio Damasceno Mendes
 ## Resumo
 
 Este trabalho apresenta o desenvolvimento de um simulador de sistema de arquivos em Java.
@@ -37,7 +36,7 @@ estado persistido.
 
 ## Metodologia
 
-O simulador foi desenvolvido em Java 17 com classes responsáveis pelo modelo de dados, pelas
+O simulador foi desenvolvido em Java com classes responsáveis pelo modelo de dados, pelas
 operações, pelo journal, pela persistência e pela interface de linha de comando. Os comandos
 digitados no shell são convertidos em chamadas de métodos da classe `FileSystemSimulator`.
 
@@ -294,6 +293,3 @@ Java. A separação entre modelo, serviço, journal, persistência e shell facil
 do funcionamento do programa. A serialização em `filesystem.dat` garante que os dados
 simulados permaneçam separados dos arquivos reais do Windows, enquanto o journal registra e
 confirma cada alteração persistente.
-
-Para a entrega no AVA, este README deve ser revisado com o nome do segundo integrante e
-impresso ou exportado em formato PDF, mantendo visível o link do projeto no GitHub.
