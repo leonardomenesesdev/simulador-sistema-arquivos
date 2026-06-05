@@ -1,6 +1,6 @@
 # M07 — README-relatório
 
-**Status:** ⏳ Pendente
+**Status:** ✅ Concluída
 **User story:** Como dupla responsável pela entrega, quero o `README.md` da raiz escrito como
 relatório completo em Markdown, para que ele possa ser exportado em PDF e enviado no AVA
 conforme exigido.
@@ -41,13 +41,13 @@ partir deste arquivo.
 
 ## Critérios de aceitação
 
-- [ ] O README pode ser lido como relatório completo, com todas as seções do enunciado.
-- [ ] Explica o que é sistema de arquivos, a importância em SOs e o conceito + tipos de journaling.
-- [ ] Descreve a arquitetura (classes) e como o `.dat` armazena os dados.
-- [ ] Traz o passo a passo de compilação/execução e os comandos do modo shell.
-- [ ] Contém a tabela de testes/resultados (M06).
-- [ ] Inclui o link do GitHub visível e os integrantes.
-- [ ] É renderizável/exportável em PDF sem quebrar a formatação.
+- [x] O README pode ser lido como relatório completo, com todas as seções do enunciado.
+- [x] Explica o que é sistema de arquivos, a importância em SOs e o conceito + tipos de journaling.
+- [x] Descreve a arquitetura (classes) e como o `.dat` armazena os dados.
+- [x] Traz o passo a passo de compilação/execução e os comandos do modo shell.
+- [x] Contém a tabela de testes/resultados (M06).
+- [x] Inclui o link do GitHub visível e os integrantes.
+- [x] É renderizável/exportável em PDF sem quebrar a formatação.
 
 ## O que testar para validar
 
